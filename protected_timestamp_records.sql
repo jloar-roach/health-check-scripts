@@ -1,0 +1,1 @@
+select (ts/1000000000)::int::timestamp as "pts timestamp", now()-((ts/1000000000)::int::timestamp) as "pts age", *,crdb_internal.cluster_name() from system.protected_ts_records where ((ts/1000000000)::int::timestamp) < now() - interval '2d';

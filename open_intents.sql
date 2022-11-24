@@ -1,0 +1,1 @@
+select * from (select name, sum((crdb_internal.range_stats(start_key)->'intent_count')::int) as intent_count from crdb_internal.ranges_no_leases as r join crdb_internal.tables as t on r.table_id = t.table_id group by name) inline where intent_count > 1000000;
